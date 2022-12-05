@@ -6,6 +6,7 @@ import org.junit.runners.Parameterized;
 import main.BaseTest;
 import pom.MainPage;
 import pom.OrderPage;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -35,13 +36,14 @@ public class MakeOrder extends BaseTest {
         this.comments = comments;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}")
     public static Object[][] checkMakeOrder() {
         return new Object[][]{
-                {"orderInHeaderButton", "Барни", "Стинсон","Центральная 34", "Красносельская", "88009007766", "04.12.2022", 1, "black", "нет"},
+                {"orderInHeaderButton", "Барни", "Стинсон", "Центральная 34", "Красносельская", "88009007766", "04.12.2022", 1, "black", "нет"},
                 {"orderInContextButton", "Евген", "Давыдов", "Луговая 44", "Лубянка", "88009009988", "05.12.2022", 2, "", "полный заряд"},
         };
     }
+
     @Test
     public void shouldMakeOrder() {
 
@@ -58,22 +60,8 @@ public class MakeOrder extends BaseTest {
 
         OrderPage orderPage = new OrderPage(driver);
 
-        orderPage.inputName(name);
-        orderPage.inputSurname(surname);
-        orderPage.inputAddress(address);
-        orderPage.inputMetro(metro);
-        orderPage.inputPhone(phone);
+        orderPage.makeOrder(name, surname, address, metro, phone, startDate, orderDays, color, comments);
 
-        orderPage.clickNextPersonFormButton();
-
-        orderPage.setStartDateInput(startDate);
-        orderPage.setDurationDropDownListInput(orderDays);
-        orderPage.setColorCheckbox(color);
-        orderPage.setCommentsInput(comments);
-
-        orderPage.clickOrderFinalButton();
-        orderPage.clickOrderConfirmationButton();
-
-        assertTrue("Ожидаем появления подтверждения \"Заказ оформлен\".",orderPage.isOrderCompletedMsg());
+        assertTrue("Ожидаем появления подтверждения \"Заказ оформлен\".", orderPage.isOrderCompletedMsg());
     }
 }

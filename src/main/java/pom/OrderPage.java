@@ -22,42 +22,50 @@ public class OrderPage {
     private final By orderFinalButton = By.xpath(".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM']");
     private final By orderConfirmationButton = By.xpath(".//button[text() = 'Да']");
     private final By orderCompletedMsg = By.xpath(".//div[text() = 'Заказ оформлен']");
+
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
 
-
     public void inputName(String text) {
         driver.findElement(nameInput).sendKeys(text);
     }
+
     public void inputSurname(String text) {
         driver.findElement(surnameInput).sendKeys(text);
     }
+
     public void inputAddress(String text) {
         driver.findElement(addressInput).sendKeys(text);
     }
+
     public void inputMetro(String text) {
         driver.findElement(metroInput).click();
         driver.findElement(metroInput).sendKeys(text, Keys.ARROW_DOWN, Keys.ENTER);
     }
+
     public void inputPhone(String text) {
         driver.findElement(phoneInput).sendKeys(text);
     }
+
     public void setStartDateInput(String text) {
         driver.findElement(startDateInput).click();
         driver.findElement(startDateInput).sendKeys(text, Keys.ENTER);
     }
+
     public void setDurationDropDownListInput(int day) {
         driver.findElement(durationDropDownListInput).click();
         driver.findElements(durationOptionsDropDownList).get(day).click();
     }
+
     public void setColorCheckbox(String color) {
         if ("black".equals(color)) {
             driver.findElement(colorBlackCheckbox).click();
-        } else if ("grey".equals(color))  {
+        } else if ("grey".equals(color)) {
             driver.findElement(colorGrayCheckbox).click();
         }
     }
+
     public void setCommentsInput(String comments) {
         driver.findElement(commentsInput).sendKeys(comments);
     }
@@ -76,5 +84,23 @@ public class OrderPage {
 
     public boolean isOrderCompletedMsg() {
         return driver.findElements(orderCompletedMsg).size() > 0;
+    }
+
+    public void makeOrder(String name, String surname, String address, String metro, String phone, String startDate, int orderDays, String color, String comments){
+        inputName(name);
+        inputSurname(surname);
+        inputAddress(address);
+        inputMetro(metro);
+        inputPhone(phone);
+
+        clickNextPersonFormButton();
+
+        setStartDateInput(startDate);
+        setDurationDropDownListInput(orderDays);
+        setColorCheckbox(color);
+        setCommentsInput(comments);
+
+        clickOrderFinalButton();
+        clickOrderConfirmationButton();
     }
 }

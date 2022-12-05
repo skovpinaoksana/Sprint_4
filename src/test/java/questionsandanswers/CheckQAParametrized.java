@@ -19,7 +19,7 @@ public class CheckQAParametrized extends BaseTest {
         this.answer = answer;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2}")
     public static Object[][] checkQA() {
         return new Object[][]{
                 {0, "Сколько это стоит? И как оплатить?", "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
@@ -45,6 +45,6 @@ public class CheckQAParametrized extends BaseTest {
 
         mainPage.clickQuestion(index);
         Assert.assertEquals("Проверка вопроса", question, mainPage.getQuestionText(index));
-        Assert.assertEquals("Проверка ответа",answer, mainPage.getAnswerText(index));
+        Assert.assertEquals("Проверка ответа", answer, mainPage.getAnswerText(index));
     }
 }

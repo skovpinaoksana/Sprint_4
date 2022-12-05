@@ -30,7 +30,7 @@ public class MainPage {
     }
 
     public void scrollToQuestionsAndAnswersSection() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(questionsAndAnswersSection));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(questionsAndAnswersSection));
     }
 
     public void clickQuestion(int index) {
@@ -57,6 +57,6 @@ public class MainPage {
     }
 
     public void scrollToOrderInContextButton() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(orderInContextButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(orderInContextButton));
     }
 }
